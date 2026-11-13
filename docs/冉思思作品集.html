@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>冉思思 - 个人作品集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft Yahei", "PingFang SC", Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 顶部导航 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            z-index: 999;
+            padding: 14px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1f3b57;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            color: #444;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2b6cb0;
+        }
+
+        /* 首屏 Hero */
+        header {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1f3b57 0%, #2b6cb0 50%, #4299e1 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            background: #ddd;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        header .subtitle {
+            font-size: 20px;
+            margin-bottom: 18px;
+            opacity: 0.9;
+        }
+
+        header p {
+            max-width: 640px;
+            font-size: 16px;
+            opacity: 0.85;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: #fff;
+            color: #2b6cb0;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #edf2f7;
+            transform: translateY(-2px);
+        }
+
+        /* 通用区块 */
+        section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 12px;
+            color: #1f3b57;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: #666;
+            margin-bottom: 48px;
+        }
+
+        /* 关于我 */
+        .about-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: #2b6cb0;
+        }
+
+        .about-text p {
+            margin-bottom: 12px;
+            color: #444;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .info-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+            color: #444;
+        }
+
+        /* 技能 */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: #fff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .skill-card h3 {
+            font-size: 20px;
+            margin-bottom: 14px;
+            color: #1f3b57;
+        }
+
+        .skill-card p {
+            color: #555;
+            font-size: 15px;
+        }
+
+        /* 作品网格 */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .work-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s;
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .work-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .work-body {
+            padding: 18px 20px 22px;
+        }
+
+        .work-body h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #1f3b57;
+        }
+
+        .work-body p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .tip {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* 联系 */
+        .contact-box {
+            background: linear-gradient(135deg, #2b6cb0, #4299e1);
+            color: #fff;
+            padding: 50px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            font-size: 26px;
+            margin-bottom: 14px;
+        }
+
+        .contact-box p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        /* 页脚 */
+        footer {
+            background: #1f3b57;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            nav {
+                padding: 12px 20px;
+            }
+
+            .nav-links {
+                gap: 14px;
+                font-size: 14px;
+            }
+
+            header h1 {
+                font-size: 34px;
+            }
+
+            header .subtitle {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .about-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 导航 -->
+    <nav>
+        <div class="logo">冉思思 · 个人作品集</div>
+        <ul class="nav-links">
+            <li><a href=" ">首页</a ></li>
+            <li><a href="#about">关于我</a ></li>
+            <li><a href="#skills">技能</a ></li>
+            <li><a href="#works">作品</a ></li>
+            <li><a href="#poster">海报</a ></li>
+            <li><a href="#photo">摄影</a ></li>
+            <li><a href="#contact">联系</a ></li>
+        </ul>
+    </nav>
+
+    <!-- 首屏 -->
+    <header id="home">
+        <div class="avatar">
+            <img src="avatar.jpg" alt="头像">
+
+        </div>
+        <h1>冉思思</h1>
+        <p class="subtitle">新媒体运营 / 视频创作 / 图文策划 / 摄影海报</p >
+        <p>我专注于内容策划、视频剪辑、海报设计与摄影创作，希望用清晰的内容和有质感的视觉，帮助品牌和作品被更多人看见。</p >
+        <a href="#works" class="btn">查看我的作品</a >
+    </header>
+
+    <!-- 关于我 -->
+    <section id="about">
+        <h2>关于我</h2>
+        <p class="section-desc">Basic Information</p >
+
+        <div class="about-wrap">
+            <div class="about-text">
+                <h3>你好，我是冉思思</h3>
+                <p>我是一名新媒体方向的创作者，熟悉内容策划、视频剪辑、海报设计和摄影后期。在校期间参与过纪录片、广告短片、混剪视频和平面海报项目，具备从策划到出片的完整执行能力。</p >
+                <p>我喜欢把内容逻辑和视觉表达结合起来，让作品既有清晰信息，也有更好的观看体验。</p >
+
+                <ul class="info-list">
+                    <li><strong>姓名：</strong>冉思思</li>
+                    <li><strong>求职意向：</strong>新媒体运营师</li>
+                    <li><strong>电话：</strong>177 2398 0703</li>
+                    <li><strong>邮箱：</strong>1720765442@qq.com</li>
+                    <li><strong>所在地：</strong>重庆市万州区</li>
+                </ul>
+            </div>
+
+            <div class="about-text">
+                <h3>我的优势</h3>
+                <p>具备新媒体内容创作基础，能够独立完成选题策划、脚本撰写、视频剪辑、海报设计和图文排版。</p >
+                <p>熟悉 PR、剪映、PS、Office 等工具，拥有较好的审美能力、执行能力和团队协作意识。</p >
+                <p>对短视频平台内容节奏敏感，重视作品的信息表达和视觉质感。</p >
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能 -->
+    <section id="skills">
+        <h2>专业技能</h2>
+        <p class="section-desc">Skills</p >
+
+        <div class="skills">
+            <div class="skill-card">
+                <h3>内容策划</h3>
+                <p>选题分析、脚本撰写、账号内容规划、活动方案构思，能够围绕主题搭建清晰的内容框架。</p >
+            </div>
+
+            <div class="skill-card">
+                <h3>视频制作</h3>
+                <p>使用 PR、剪映完成视频剪辑、字幕、转场、调色和基础包装，可完成纪录片、广告、混剪等类型作品。</p >
+            </div>
+
+            <div class="skill-card">
+                <h3>视觉设计</h3>
+                <p>使用 PS 进行海报设计、图片处理和版式排版，具备基础审美与平面作品输出能力。</p >
+            </div>
+
+            <div class="skill-card">
+                <h3>摄影创作</h3>
+                <p>包括纪实摄影、环境人像、活动拍摄等，能够完成前期拍摄与后期调色整理。</p >
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频项目作品 -->
+   <section id="works">
+<h2>视频作品</h2>
+<p class="section-desc">Video Projects</p >
+<div class="works-grid">
+  <div class="work-card">
+    <a href=" " target="_blank">
+      <video src="炭火留香——万州烤鱼的非遗坚守纪录短片.mp4" controls width="100%"></video>
+      <div class="work-body">
+        <h3>炭火留香——万州烤鱼的非遗坚守纪录短片</h3>
+        <p>独立负责策划、写脚本、拍摄与后期剪辑，通过纪实镜头和细节特写呈现炭火烤鱼的非遗传承过程。</p >
+      </div>
+    </a >
+  </div>
+  <div class="work-card">
+    <a href="大足玉龙土陶纪录片.mp4" target="_blank">
+      <video src="大足玉龙土陶纪录片.mp4" controls width="100%"></video>
+      <div class="work-body">
+        <h3>大足玉龙土陶纪录片</h3>
+        <p>参与拍摄与后期剪辑，通过工艺镜头、访谈画面呈现传统土陶制作过程。</p >
+      </div>
+    </a >
+  </div>
+  <div class="work-card">
+    <a href="娃哈哈创意广告短片.mp4" target="_blank">
+      <video src="娃哈哈创意广告短片.mp4" controls width="100%"></video>
+      <div class="work-body">
+        <h3>娃哈哈创意广告短片</h3>
+        <p>以青春视角打造品牌广告片，完成脚本、拍摄、剪辑全流程创作。</p >
+      </div>
+    </a >
+  </div>
+  <div class="work-card">
+    <a href="校园日常Vlog.mp4" target="_blank">
+      <video src="校园日常Vlog.mp4" controls width="100%"></video>
+      <div class="work-body">
+        <h3>校园拼豆日常Vlog</h3>
+        <p>由自己全程策划、出镜、拍摄与剪辑，用自拍视角记录校园拼豆日常，用生活化剪辑带出松弛氛围感。</p >
+      </div>
+    </a >
+  </div>
+  <div class="work-card">
+    <a href="清潭高中2模拍.mp4" target="_blank">
+      <video src="清潭高中2模拍.mp4" controls width="100%"></video>
+      <div class="work-body">
+        <h3>清潭高中2模拍</h3>
+        <p>还原清潭高中场景进行二次仿拍，复刻原片镜头节奏，加入个人视角的拍摄与剪辑处理。</p >
+      </div>
+    </a >
+  </div>
+  <div class="work-card">
+    <a href="大鱼海棠影视混剪.mp4" target="_blank">
+      <video src="大鱼海棠影视混剪.mp4" controls width="100%"></video>
+      <div class="work-body">
+        <h3>大鱼海棠影视混剪</h3>
+        <p>选取影片片段进行二次剪辑，搭配配乐营造氛围感，练习镜头节奏与情绪表达。</p >
+      </div>
+    </a >
+  </div>
+</div>
+</section>
+
+    <!-- 海报作品集 -->
+    <section id="poster">
+        <h2>海报作品集</h2>
+        <p class="section-desc">Poster Works · 点击图片查看完整大图</p >
+
+        <div class="works-grid">
+            <div class="work-card">
+                <a href="poster1.jpg" target="_blank">
+                    < img src="poster1.jpg" alt="原创阿勒泰四季长海报" />
+                    <div class="work-body">
+                        <h3>原创阿勒泰四季长海报</h3>
+                        <p>原创长图版式设计，突出地域风景与四季氛围，以四季风物为线索，用色彩过渡串联场景，强化视觉流动感。</p >
+                    </div>
+                </a >
+            </div>
+
+            <div class="work-card">
+                <a href="poster2.jpg" target="_blank">
+                    < img src="poster2.jpg" alt="毓美丽海报设计" />
+                    <div class="work-body">
+                        <h3>毓美丽海报设计</h3>
+                        <p>以柔粉水墨质感为基底，搭配手绘人物线条与主题书法字，用轻盈笔触传递温柔氛围感，完整呈现从手绘线稿到成稿的创意表达</p >
+                    </div>
+                </a >
+            </div>
+
+            <div class="work-card">
+                <a href="poster3.jpg" target="_blank">
+                    < img src="poster3.jpg" alt="双重曝光海报" />
+                    <div class="work-body">
+                        <h3>双重曝光海报</h3>
+                        <p>将人像与城市建筑融合，表达奔赴远方、纵横四海的主题。</p >
+                    </div>
+                </a >
+            </div>
+
+            <div class="work-card">
+                <a href="poster4.jpg" target="_blank">
+                    < img src="poster4.jpg" alt="创意海报" />
+                    <div class="work-body">
+                        <h3>创意海报</h3>
+                        <p>以橙红调色和网格排版做出赛博颗粒质感。</p >
+                    </div>
+                </a >
+            </div>
+
+  <div class="work-card">
+                <a href="poster5.jpg" target="_blank">
+                    < img src="poster5.jpg" alt="首创海报" />
+                    <div class="work-body">
+                        <h3>首创海报</h3>
+                        <p>以黑底衬柔焦球形光晕为视觉核心，搭配错落排布的轻重对比字体，用极简黑白灰层次与留白版式，强化摄影艺术的氛围感与主题叙事。</p >
+                    </div>
+                </a >
+            </div>
+
+            <div class="work-card">
+                <a href="poster6.jpg" target="_blank">
+                    < img src="poster6.jpg" alt="创意海报" />
+                    <div class="work-body">
+                        <h3>创意海报</h3>
+                        <p>手绘木棉长海报以蛋黄绿底手绘几何与花材拼合，用竖版分段版式传递春日文艺氛围。</p >
+                    </div>
+                </a >
+            </div>
+        </div>
+
+        <p class="tip">建议使用长图原图作为 poster1.jpg，网页点击后可在新标签页完整查看。</p >
+    </section>
+
+    <!-- 摄影作品集 -->
+    <section id="photo">
+        <h2>摄影作品集</h2>
+        <p class="section-desc">Photography Works · 点击图片查看完整大图</p >
+
+        <div class="works-grid">
+            <div class="work-card">
+                <a href="photo1.jpg" target="_blank">
+                    < img src="photo1.jpg" alt="高评摄影图" />
+                    <div class="work-body">
+                        <h3>高评摄影图</h3>
+                        <p>这张景物摄影以竖构图将雕饰精美的古建飞檐与背景现代高楼并置，冷色调统一画面，呈现古今建筑共生的城市氛围感。</p >
+                    </div>
+                </a >
+            </div>
+
+            <div class="work-card">
+                <a href="photo2.jpg" target="_blank">
+                    < img src="photo2.jpg" alt="暗调摄影图" />
+                    <div class="work-body">
+                        <h3>暗调摄影图</h3>
+                        <p>使用低Key压光法拍摄，采用压光拍摄手法，压低曝光压暗环境，突出雏菊主体，营造静谧柔和的视觉效果。</p >
+                    </div>
+                </a >
+            </div>
+
+            <div class="work-card">
+                <a href="photo3.jpg" target="_blank">
+                    < img src="photo3.jpg" alt="人像摄影之一" />
+                    <div class="work-body">
+                        <h3>人像摄影之一</h3>
+                        <p>居中构图把人物放在视觉中心，满地金黄落叶做背景烘托秋日氛围，动态飘落的树叶增加了画面氛围感。</p >
+                    </div>
+                </a >
+            </div>
+        </div>
+    </section>
+<p style="text-align:center; margin:24px 0; font-size:16px; color:#333;">还有更多商品广告拍摄图</p >
+<p style="text-align:center; margin:24px 0; font-size:30px; color:#333;">还没看过瘾？想看更多那就联系我吧！</p >    <!-- 联系 -->
+    <section id="contact">
+        <h2>联系我</h2>
+        <p class="section-desc">Contact</p >
+
+        <div class="contact-box">
+            <h3>期待与你合作</h3>
+            <p>电话：177 2398 0703</p >
+            <p>邮箱：1720765442@qq.com</p >
+            <p>地址：重庆市万州区</p >
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2026 冉思思 · 个人作品集</p >
+    </footer>
+
+</body>
+</html>
